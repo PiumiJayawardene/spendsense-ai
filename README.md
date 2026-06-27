@@ -1,36 +1,187 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💰 SpendSense AI
 
-## Getting Started
+> AI-Powered Personal Finance Assistant
 
-First, run the development server:
+SpendSense AI is a modern web-based personal finance assistant that helps users analyse bank statements, categorise transactions using Artificial Intelligence, manage monthly budgets, detect spending trends, forecast future expenses, and interact with their financial data through an AI-powered chatbot.
+
+---
+
+## 📌 Features
+
+- 📄 Upload bank statements in PDF or CSV format
+- 🤖 AI-powered transaction categorisation
+- 📊 Interactive spending analytics and charts
+- 💰 Monthly budget management
+- 📈 Spending insights and trend detection
+- 🔮 Next-month spending forecast
+- 💬 AI financial assistant chatbot
+- ✏️ Manual transaction category editing
+- 🌙 Light and Dark theme support
+- 🎨 Modern responsive user interface
+- 🔍 Semantic transaction search using embeddings
+
+---
+
+## 🛠️ Technology Stack
+
+### Frontend
+- Next.js 16
+- React
+- TypeScript
+- Tailwind CSS
+- Recharts
+
+### Backend
+- Next.js API Routes
+- Node.js
+
+### Database
+- Supabase
+- PostgreSQL
+
+### Artificial Intelligence
+- Groq LLM
+- AI-powered transaction categorisation
+- Embedding generation
+- Retrieval-Augmented Generation (RAG)
+
+---
+
+## 📁 Supported File Formats
+
+- PDF Bank Statements
+- CSV Bank Statements
+
+---
+
+## 📊 System Modules
+
+### Dashboard
+- Financial overview
+- Income and expense statistics
+- Spending charts
+- Recent transactions
+
+### Statement Upload
+- PDF parser
+- CSV parser
+- Automatic transaction extraction
+- AI categorisation
+
+### Budget Management
+- Monthly budget creation
+- Budget utilisation tracking
+- Budget progress indicators
+
+### Insights
+- Spending alerts
+- Category analysis
+- Forecasted monthly spending
+
+### AI Chat Assistant
+- Answers questions using your own financial data
+- Spending summaries
+- Budget-related queries
+- Transaction analysis
+
+---
+
+## 🚀 Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/yourusername/spendsense-ai.git
+```
+
+Navigate to the project
+
+```bash
+cd spendsense-ai
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Create an environment file
+
+```bash
+.env.local
+```
+
+Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🔑 Environment Variables
 
-To learn more about Next.js, take a look at the following resources:
+Create a `.env.local` file and configure:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```env
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+GROQ_API_KEY=
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📷 Screenshots
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Add screenshots here after deployment.
+
+Example:
+
+- Login Page
+- Dashboard
+- Budget Management
+- AI Chat
+- Spending Insights
+
+---
+
+## 📚 Project Objectives
+
+SpendSense AI was developed to help users:
+
+- Better understand their spending habits
+- Automate transaction categorisation
+- Manage monthly budgets effectively
+- Receive intelligent financial insights
+- Interact with their financial data using AI
+
+---
+
+## 🔮 Future Improvements
+
+- Support for additional banks
+- Universal AI document parser
+- Multi-bank account support
+- OCR support for scanned statements
+- Mobile application
+- Investment tracking
+- Bill reminders
+- Savings goal recommendations
+- Export reports to PDF
+
+
+
+---
+
+## 📄 License
+
+This project is intended for educational purposes.
