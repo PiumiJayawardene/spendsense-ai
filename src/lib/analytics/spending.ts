@@ -17,10 +17,7 @@ export interface MonthlyTotal {
   expenses: number;
 }
 
-/**
- * Groups all expense transactions (negative amounts) by category and
- * sums them, returning the totals as positive numbers for easy display.
- */
+
 export function getCategoryBreakdown(
   transactions: TransactionForAnalytics[]
 ): CategoryBreakdown[] {
@@ -45,10 +42,7 @@ export function getCategoryBreakdown(
     .sort((a, b) => b.total - a.total);
 }
 
-/**
- * Groups transactions by month (YYYY-MM) and sums income vs expenses
- * separately, for a month-over-month trend chart.
- */
+
 export function getMonthlyTotals(
   transactions: TransactionForAnalytics[]
 ): MonthlyTotal[] {

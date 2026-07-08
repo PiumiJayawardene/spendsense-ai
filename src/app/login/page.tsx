@@ -28,9 +28,7 @@ export default async function LoginPage({
             transaction history questions in plain English.
           </p>
         </div>
-        <p className="text-xs text-slate-500">
-          Built with Next.js, Supabase, and a local-first AI pipeline.
-        </p>
+      
       </div>
 
       <div className="flex flex-1 items-center justify-center bg-[var(--bg-app)] px-4 py-12">

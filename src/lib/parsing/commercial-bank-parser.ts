@@ -110,17 +110,17 @@ export async function parseCommercialBankStatement(
               const x = part.x;
               const text = part.text;
 
-              // Description area
+             
               if (x >= 11 && x < 23) {
                 description += text;
               }
 
-              // Receipt column
+             
               if (x >= 23 && x < 26) {
                 receiptAmount += text;
               }
 
-              // Payment column
+              
               if (x >= 26) {
                 paymentAmount += text;
               }

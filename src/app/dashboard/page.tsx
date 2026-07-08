@@ -55,7 +55,7 @@ export default async function DashboardPage() {
       <Card>
         <CardHeader
           title="Upload a statement"
-          subtitle="CSV or PDF — we'll parse and categorize it automatically"
+          subtitle="CSV or PDF(For PDFs-Currently supports Commercial Bank flash app pdf statements only) — we'll parse and categorize it automatically."
           icon={<UploadIcon className="h-4 w-4" />}
         />
         <UploadForm />

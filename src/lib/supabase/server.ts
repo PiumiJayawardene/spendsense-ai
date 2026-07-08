@@ -18,7 +18,7 @@ export async function createSupabaseServerClient() {
               cookieStore.set(name, value, options)
             );
           } catch {
-            // Safe to ignore here; the proxy.ts file (next) handles refresh.
+            
           }
         },
       },

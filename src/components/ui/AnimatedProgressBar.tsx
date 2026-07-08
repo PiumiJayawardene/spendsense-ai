@@ -12,8 +12,7 @@ export function AnimatedProgressBar({
   const [width, setWidth] = useState(0);
 
   useEffect(() => {
-    // Defer to next frame so the transition actually animates from 0
-    // instead of snapping straight to the target value on mount.
+    
     const id = requestAnimationFrame(() => setWidth(percent));
     return () => cancelAnimationFrame(id);
   }, [percent]);
