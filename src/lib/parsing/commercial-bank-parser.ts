@@ -90,6 +90,13 @@ export async function parseCommercialBankStatement(
               .replace(/\s+/g, " ")
               .trim();
 
+              console.log(
+  sortedParts.map((p) => ({
+    text: p.text,
+    x: p.x,
+  }))
+);
+
             const dateMatch = rowText.match(
               /^(\d{1,2}\s+[A-Za-z]{3}\s+\d{4})/
             );
@@ -106,25 +113,26 @@ export async function parseCommercialBankStatement(
             let receiptAmount = "";
             let paymentAmount = "";
 
-            for (const part of sortedParts) {
-              const x = part.x;
-              const text = part.text;
+           const DESCRIPTION_START = 11;
+const RECEIPT_START = 21.5;
+const PAYMENT_START = 25.5;
 
-             
-              if (x >= 11 && x < 23) {
-                description += text;
-              }
+for (const part of sortedParts) {
+  const x = part.x;
+  const text = part.text;
 
-             
-              if (x >= 23 && x < 26) {
-                receiptAmount += text;
-              }
+  if (x >= DESCRIPTION_START && x < RECEIPT_START) {
+    description += text;
+  }
 
-              
-              if (x >= 26) {
-                paymentAmount += text;
-              }
-            }
+  if (x >= RECEIPT_START && x < PAYMENT_START) {
+    receiptAmount += text;
+  }
+
+  if (x >= PAYMENT_START) {
+    paymentAmount += text;
+  }
+}
 
             description = description
   .replace(/\s+/g, " ")

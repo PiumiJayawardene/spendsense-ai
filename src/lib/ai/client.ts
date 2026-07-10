@@ -99,24 +99,42 @@ async function getGroqCompletion(
   return data.choices?.[0]?.message?.content ?? "";
 }
 
-
 export async function getEmbedding(
   text: string
 ): Promise<number[]> {
-  const baseUrl = process.env.OLLAMA_BASE_URL ?? "http://localhost:11434";
-  const model =
-    process.env.OLLAMA_EMBED_MODEL ?? "nomic-embed-text";
+  const provider = process.env.AI_PROVIDER ?? "ollama";
 
-  const response = await fetch(`${baseUrl}/api/embeddings`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      model,
-      prompt: text,
-    }),
-  });
+  if (provider === "groq") {
+    return getHuggingFaceEmbedding(text);
+  }
+
+  return getOllamaEmbedding(text);
+}
+
+async function getOllamaEmbedding(
+  text: string
+): Promise<number[]> {
+  const baseUrl =
+    process.env.OLLAMA_BASE_URL ??
+    "http://localhost:11434";
+
+  const model =
+    process.env.OLLAMA_EMBED_MODEL ??
+    "nomic-embed-text";
+
+  const response = await fetch(
+    `${baseUrl}/api/embeddings`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model,
+        prompt: text,
+      }),
+    }
+  );
 
   if (!response.ok) {
     throw new Error(
@@ -127,4 +145,46 @@ export async function getEmbedding(
   const data = await response.json();
 
   return data.embedding;
+}
+
+async function getHuggingFaceEmbedding(
+  text: string
+): Promise<number[]> {
+  const token = process.env.HF_API_TOKEN;
+
+  if (!token) {
+    throw new Error("HF_API_TOKEN is missing.");
+  }
+
+  const response = await fetch(
+    "https://router.huggingface.co/hf-inference/models/BAAI/bge-base-en-v1.5/pipeline/feature-extraction",
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        inputs: text,
+      }),
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error(
+      `Hugging Face request failed: ${response.status} ${await response.text()}`
+    );
+  }
+
+  const data = await response.json();
+
+  if (Array.isArray(data) && Array.isArray(data[0])) {
+    return data[0];
+  }
+
+  if (Array.isArray(data)) {
+    return data;
+  }
+
+  throw new Error("Unexpected embedding response.");
 }
