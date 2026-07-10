@@ -91,11 +91,6 @@ export async function parseCommercialBankStatement(
               .trim();
 
               
-  sortedParts.map((p) => ({
-    text: p.text,
-    x: p.x,
-  }))
-);
 
             const dateMatch = rowText.match(
               /^(\d{1,2}\s+[A-Za-z]{3}\s+\d{4})/
