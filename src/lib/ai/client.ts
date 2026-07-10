@@ -152,39 +152,57 @@ async function getHuggingFaceEmbedding(
 ): Promise<number[]> {
   const token = process.env.HF_API_TOKEN;
 
+  console.log("HF token exists:", !!token);
+
   if (!token) {
     throw new Error("HF_API_TOKEN is missing.");
   }
 
-  const response = await fetch(
-    "https://router.huggingface.co/hf-inference/models/BAAI/bge-base-en-v1.5/pipeline/feature-extraction",
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        inputs: text,
-      }),
-    }
-  );
-
-  if (!response.ok) {
-    throw new Error(
-      `Hugging Face request failed: ${response.status} ${await response.text()}`
+  try {
+    const response = await fetch(
+      "https://router.huggingface.co/hf-inference/models/BAAI/bge-base-en-v1.5/pipeline/feature-extraction",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          inputs: text,
+        }),
+      }
     );
+
+    console.log("HF Status:", response.status);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("HF Response:", errorText);
+
+      throw new Error(
+        `Hugging Face request failed: ${response.status}`
+      );
+    }
+
+    const data = await response.json();
+
+    console.log(
+      "HF Response Type:",
+      Array.isArray(data),
+      Array.isArray(data[0])
+    );
+
+    if (Array.isArray(data) && Array.isArray(data[0])) {
+      return data[0];
+    }
+
+    if (Array.isArray(data)) {
+      return data;
+    }
+
+    throw new Error("Unexpected embedding response.");
+  } catch (err) {
+    console.error("HF Fetch Error:", err);
+    throw err;
   }
-
-  const data = await response.json();
-
-  if (Array.isArray(data) && Array.isArray(data[0])) {
-    return data[0];
-  }
-
-  if (Array.isArray(data)) {
-    return data;
-  }
-
-  throw new Error("Unexpected embedding response.");
 }
