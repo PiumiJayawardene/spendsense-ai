@@ -90,7 +90,7 @@ export async function parseCommercialBankStatement(
               .replace(/\s+/g, " ")
               .trim();
 
-              console.log(
+              
   sortedParts.map((p) => ({
     text: p.text,
     x: p.x,
