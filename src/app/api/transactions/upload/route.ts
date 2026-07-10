@@ -175,9 +175,17 @@ const categoryNameMap = buildCategoryNameMap(categories ?? []);
     }));
 
     
-    embedTransactionBatch(userId, transactionsForEmbedding).catch((err) =>
-      console.error("Background embedding batch failed:", err)
-    );
+    try {
+  await embedTransactionBatch(
+    userId,
+    transactionsForEmbedding
+  );
+} catch (err) {
+  console.error(
+    "Embedding batch failed:",
+    err
+  );
+}
   }
 const categorizedByRule = inserted?.filter((t) => t.categorized_by === "rule").length ?? 0;
   const categorizedByAi = inserted?.filter((t) => t.categorized_by === "ai").length ?? 0;
